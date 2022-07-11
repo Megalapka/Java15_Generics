@@ -20,7 +20,7 @@ public class TicketsRepository {
     }
 
     public Tickets[] getTickets() {
-        return  tickets;
+        return tickets;
     }
 
     public Tickets findById(int id) {
@@ -47,7 +47,6 @@ public class TicketsRepository {
         }
         tickets = tmp;
     }
-
 
 
 }

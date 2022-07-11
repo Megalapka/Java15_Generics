@@ -5,14 +5,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Tickets;
+import ru.netology.exception.AlreadyExistsException;
+import ru.netology.exception.NotFoundException;
 
 public class TicketsRepositoryTest {
 
     TicketsRepository repo = new TicketsRepository();
-    Tickets ticket1 = new Tickets(1, 200, "LED", "VOG", 180);
+    Tickets ticket1 = new Tickets(1, 200, "LED", "VOG", 300);
     Tickets ticket2 = new Tickets(2, 2100, "VKT", "DME", 240);
     Tickets ticket3 = new Tickets(3, 100, "KGD", "NYM", 300);
-    Tickets ticket4 = new Tickets(4, 1500, "NJC", "LED", 200);
+    Tickets ticket4 = new Tickets(4, 1500, "LED", "VOG", 200);
     Tickets ticket5 = new Tickets(5, 200, "SGC", "TJM", 90);
 
     @BeforeEach
@@ -43,6 +45,7 @@ public class TicketsRepositoryTest {
 
         assertArrayEquals(expected, actual);
     }
+
     @Test
     public void shouldFindById() {
 
@@ -50,6 +53,23 @@ public class TicketsRepositoryTest {
         Tickets actual = repo.findById(3);
 
         assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldExceptionWithRemoveById() {
+        assertThrows(NotFoundException.class, () -> {
+            repo.removeById(10);
+        });
+
+
+    }
+
+    @Test
+    public void shouldExceptionWithSaveSmartphone() {
+        assertThrows(AlreadyExistsException.class, () -> {
+            repo.save(ticket1);
+        });
 
     }
 }

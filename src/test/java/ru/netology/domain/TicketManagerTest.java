@@ -11,9 +11,9 @@ public class TicketManagerTest {
     TicketManager manager = new TicketManager(repo);
     Tickets ticket1 = new Tickets(1, 200, "LED", "VOG", 300);
     Tickets ticket2 = new Tickets(2, 2100, "VKT", "DME", 240);
-    Tickets ticket3 = new Tickets(3, 100, "KGD", "NYM", 300);
+    Tickets ticket3 = new Tickets(3, 100, "KGD", "VOG", 300);
     Tickets ticket4 = new Tickets(4, 1500, "LED", "VOG", 200);
-    Tickets ticket5 = new Tickets(5, 200, "SGC", "TJM", 90);
+    Tickets ticket5 = new Tickets(5, 200, "LED", "TJM", 90);
     Tickets ticket6 = new Tickets(6, 900, "LED", "VOG", 250);
 
     @BeforeEach
@@ -34,9 +34,9 @@ public class TicketManagerTest {
     }
 
     @Test
-    public void shouldSearchByDepartureAirportAndArrivalAirport() {
-        Tickets[] expected = {ticket1, ticket4, ticket6};
-        Tickets[] actual = manager.findTicketsByDepartureAirportAndArrivalAirport("LED", "VOG");
+    public void shouldSearchByFromAirportAndTolAirport() {
+        Tickets[] expected = {ticket1, ticket6, ticket4};
+        Tickets[] actual = manager.findTicketsByFromAirportAndToAirport("LED", "VOG");
         assertArrayEquals(expected, actual);
     }
 }

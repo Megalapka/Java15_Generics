@@ -2,6 +2,8 @@ package ru.netology.domain;
 
 import ru.netology.repository.TicketsRepository;
 
+import java.util.Arrays;
+
 public class TicketManager {
 
     private TicketsRepository repo;
@@ -18,22 +20,21 @@ public class TicketManager {
         return repo.getTickets();
     }
 
-    public Tickets[] findTicketsByDepartureAirportAndArrivalAirport(String departure, String arrival) {
+    public Tickets[] findTicketsByFromAirportAndToAirport(String departure, String arrival) {
         TicketsRepository repoResult = new TicketsRepository();
         for (Tickets ticket : repo.getTickets()) {
             if (conformity(ticket, departure, arrival)) {
                 repoResult.save(ticket);
             }
         }
+
+      Arrays.sort(repoResult.getTickets());
         return repoResult.getTickets();
     }
 
     public boolean conformity(Tickets ticket, String departure, String arrival) {
-        if ((ticket.getDepartureAirport().contains(departure)) & (ticket.getArrivalAirport().contains(arrival))) {
-            return true;
-        } else {
-            return false;
-        }
+        return ticket.getDepartureAirport().contains(departure) && ticket.getArrivalAirport().contains(arrival);
+
     }
 
 

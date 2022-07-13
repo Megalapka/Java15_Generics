@@ -28,7 +28,7 @@ public class TicketManager {
             }
         }
 
-      Arrays.sort(repoResult.getTickets());
+        Arrays.sort(repoResult.getTickets());
         return repoResult.getTickets();
     }
 
